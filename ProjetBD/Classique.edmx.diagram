@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0fcf5b13f24489e9324102856270cc4" Name="Diagram1">
+        <EntityTypeShape EntityType="ClassiqueModel.Abonné" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Album" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Composer" Width="1.5" PointX="10.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Composition" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Composition_Disque" Width="1.5" PointX="9.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Composition_Oeuvre" Width="1.5" PointX="13.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Direction" Width="1.5" PointX="10.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Disque" Width="1.5" PointX="7.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Editeur" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Enregistrement" Width="1.5" PointX="8" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Genre" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Instrument" Width="1.5" PointX="5.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Interpréter" Width="1.5" PointX="10.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Musicien" Width="1.5" PointX="8" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Oeuvre" Width="1.5" PointX="8" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Orchestres" Width="1.5" PointX="8" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Pays" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Type_Morceaux" Width="1.5" PointX="5.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Acheter" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Catalogue" Width="1.5" PointX="2.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassiqueModel.Emprunter" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="ClassiqueModel.Emprunter_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.FK_Abonné_Pays" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Album_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Album_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Disque_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Emprunter_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.FK_Composer_Musicien" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.FK_Composer_Oeuvre" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Composition_Oeuvre_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Enregistrement_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Composition_Disque_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Composition_Disque_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Composition_Oeuvre_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Direction_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Direction_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Direction_FK02" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Editeur_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Interpréter_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Interpréter_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Musicien_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Interpréter_FK02" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Musicien_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.Oeuvre_FK00" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

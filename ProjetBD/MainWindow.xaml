@@ -1,8 +1,48 @@
 ﻿<Window x:Class="ProjetBD.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:data="clr-namespace:ProjetBD"
+        Title="MainWindow" Height="500" Width="725">
     <Grid>
-        
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="Musiciens" ObjectType="{x:Type data:Fournisseur}" MethodName="GetMusiciens"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="275"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3"/>
+        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}"/>
+
+        <StackPanel Margin="5,5,0,0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Image Height="200" Width="200" Margin="10,10,10,10"/>
+            <StackPanel Orientation="Vertical" Width="200" Margin="40,0,0,0">
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Nom"/></TextBlock>
+                    <TextBox Height="20" x:Name="Nom" Width="80" Margin="50,0,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Prénom"/></TextBlock>
+                    <TextBox Height="20" x:Name="Prénom" Width="80" Margin="35,0,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Naissance"/></TextBlock>
+                    <TextBox Height="20" x:Name="Naissance" Width="80" Margin="24,0,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Décès"/></TextBlock>
+                    <TextBox Height="20" x:Name="Décès" Width="80" Margin="45,0,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Pays"/></TextBlock>
+                    <ComboBox Height="20" x:Name="Pays" Width="80" Margin="54,0,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <TextBlock Height="20"><Run Text="Instrument"/></TextBlock>
+                    <ComboBox Height="20" x:Name="Instrument" Width="80" Margin="20,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
