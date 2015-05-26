@@ -110,6 +110,7 @@
     <Compile Include="Genre.cs">
       <DependentUpon>Classique.tt</DependentUpon>
     </Compile>
+    <Compile Include="ImageConverter.cs" />
     <Compile Include="Instrument.cs">
       <DependentUpon>Classique.tt</DependentUpon>
     </Compile>

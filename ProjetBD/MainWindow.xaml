@@ -6,6 +6,25 @@
     <Grid>
         <Grid.Resources>
             <ObjectDataProvider x:Key="Musiciens" ObjectType="{x:Type data:Fournisseur}" MethodName="GetMusiciens"/>
+            <data:ImageConverter x:Key="img"/>
+            <DataTemplate x:Key="musicienLayout" DataType="data:Musicien">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="{Binding Path=Photo, Converter={StaticResource img}}" RenderOptions.BitmapScalingMode="HighQuality" Height="50" Width="50"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Nom_Musicien}" FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text="{Binding Path=Prénom_Musicien}" FontWeight="Bold" Foreground="Blue"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Année_Naissance}" FontWeight="Bold" Foreground="Green"/>
+                        <TextBlock Text=" - " FontWeight="Bold" Foreground="Green"/>
+                        <TextBlock Text="{Binding Path=Année_Mort}" FontWeight="Bold" Foreground="Green"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Pays.Nom_Pays}" FontWeight="Bold" Foreground="Red"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275"/>
@@ -13,7 +32,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3"/>
-        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}"/>
+        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource musicienLayout}"/>
 
         <StackPanel Margin="5,5,0,0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Height="200" Width="200" Margin="10,10,10,10"/>
