@@ -23,7 +23,7 @@ namespace ProjetBD
             if (value == null)
             {
                 BitmapImage image = new BitmapImage();
-                // On affiche, pas d'image
+                // On affiche "pas d'image"
                 return image;
             }
             return null;

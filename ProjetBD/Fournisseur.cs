@@ -17,5 +17,25 @@ namespace ProjetBD
 
             return mus.ToList();
         }
+
+        public List<Pays> GetPays()
+        {
+            ClassiqueEntities context = new ClassiqueEntities();
+            var pays = (from p in context.Pays
+                        orderby p.Nom_Pays
+                        select p);
+            return pays.ToList();
+        }
+        
+        public List<Instrument> GetInstruments()
+        {
+            ClassiqueEntities context = new ClassiqueEntities();
+            var instr = (from i in context.Instrument
+                        orderby i.Nom_Instrument
+                        select i);
+            return instr.ToList();
+        }
+
+
     }
 }
