@@ -8,6 +8,8 @@
             <ObjectDataProvider x:Key="Musiciens" ObjectType="{x:Type data:Fournisseur}" MethodName="GetMusiciens"/>
             <ObjectDataProvider x:Key="Pays" ObjectType="{x:Type data:Fournisseur}" MethodName="GetPays"/>
             <ObjectDataProvider x:Key="Instrument" ObjectType="{x:Type data:Fournisseur}" MethodName="GetInstruments"/>
+            <ObjectDataProvider x:Key="Album" ObjectType="{x:Type data:Fournisseur}" MethodName="GetAlbums" MethodParameters="{Binding SelectedItem.Code_Musicien ElementName=LMusicien}"/>
+
             <data:ImageConverter x:Key="img"/>
             <DataTemplate x:Key="MusicienLayout" DataType="data:Musicien">
                 <StackPanel Orientation="Horizontal">
@@ -29,6 +31,22 @@
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
+            <DataTemplate x:Key="AlbumsLayout" DataType="data:Album">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding Path=Pochette, Converter={StaticResource img}}" RenderOptions.BitmapScalingMode="HighQuality" Height="50" Width="50"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Titre_Album}" FontWeight="Bold" Foreground="Blue"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Année_Album}" FontWeight="Bold" Foreground="Green"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Editeur.Nom_Editeur}" FontWeight="Bold" Foreground="Red"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="275"/>
@@ -39,40 +57,41 @@
         <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource MusicienLayout}"/>
 
         <StackPanel Margin="5,5,0,0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
-            <Image Height="200" Width="200" Margin="10,10,10,10" Source="{Binding ElementName=LMusicien, Path=SelectedItem.Photo, Converter={StaticResource img}}"
-                RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Width="200" Height="200" Source="{Binding SelectedItem.Photo, Converter={StaticResource img}, ElementName=LMusicien}"
+        		RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Bottom"/>
             <StackPanel Orientation="Vertical" Width="200" Margin="40,0,0,0">
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Nom"/></TextBlock>
-                    <TextBox Height="20" x:Name="Nom" Width="80" Margin="50,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Nom_Musicien}"/>
+                    <TextBox Height="20" x:Name="Nom" Width="80" Margin="50,0,0,0" Text="{Binding SelectedItem.Nom_Musicien, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Prénom"/></TextBlock>
-                    <TextBox Height="20" x:Name="Prénom" Width="80" Margin="35,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Prénom_Musicien}"/>
+                    <TextBox Height="20" x:Name="Prénom" Width="80" Margin="35,0,0,0" Text="{Binding SelectedItem.Prénom_Musicien, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Naissance"/></TextBlock>
-                    <TextBox Height="20" x:Name="Naissance" Width="80" Margin="24,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Année_Naissance}"/>
+                    <TextBox Height="20" x:Name="Naissance" Width="80" Margin="24,0,0,0" Text="{Binding SelectedItem.Année_Naissance, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Décès"/></TextBlock>
-                    <TextBox Height="20" x:Name="Décès" Width="80" Margin="45,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Année_Mort}"/>
+                    <TextBox Height="20" x:Name="Décès" Width="80" Margin="45,0,0,0" Text="{Binding SelectedItem.Année_Mort, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Pays"/></TextBlock>
-                    <ComboBox Height="20" x:Name="Pays" Width="80" Margin="54,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Pays.Nom_Pays}"
+                    <ComboBox Height="20" x:Name="Pays" Width="80" Margin="54,0,0,0" Text="{Binding SelectedItem.Pays.Nom_Pays, ElementName=LMusicien}"
                               ItemsSource="{Binding Source={StaticResource Pays}}"
                               SelectedValuePath="Code_Pays"
                               DisplayMemberPath="Nom_Pays"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Instrument"/></TextBlock>
-                    <ComboBox Height="20" x:Name="Instrument" Width="80" Margin="20,0,0,0" Text="{Binding ElementName=LMusicien, Path=SelectedItem.Instrument.Nom_Instrument}"
+                    <ComboBox Height="20" x:Name="Instrument" Width="80" Margin="20,0,0,0" Text="{Binding SelectedItem.Instrument.Nom_Instrument, ElementName=LMusicien}"
                               ItemsSource="{Binding Source={StaticResource Instrument}}"
                               SelectedValuePath="Code_Instrument"
                               DisplayMemberPath="Nom_Instrument"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <ListBox x:Name="LAlbums" Grid.Column="2" Margin="5,200,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Album}}" ItemTemplate="{DynamicResource AlbumsLayout}"/>
     </Grid>
 </Window>

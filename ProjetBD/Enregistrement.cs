@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace ProjetBD
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Enregistrement
     {
         public Enregistrement()

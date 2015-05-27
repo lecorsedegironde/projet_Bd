@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace ProjetBD
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Instrument
     {
         public Instrument()

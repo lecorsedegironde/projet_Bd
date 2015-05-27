@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetBD
 {
@@ -13,7 +9,7 @@ namespace ProjetBD
         {
             ClassiqueEntities context = new ClassiqueEntities();
             var mus = (from m in context.Musicien
-                       where  m.Composer.Count != 0
+                       where m.Composer.Count != 0
                        orderby m.Nom_Musicien
                        select m);
 
@@ -29,17 +25,26 @@ namespace ProjetBD
 
             return pays.ToList();
         }
-        
+
         public List<Instrument> GetInstruments()
         {
             ClassiqueEntities context = new ClassiqueEntities();
             var instr = (from i in context.Instrument
-                        orderby i.Nom_Instrument
-                        select i);
+                         orderby i.Nom_Instrument
+                         select i);
 
             return instr.ToList();
         }
 
+        public List<Album> GetAlbums(/*int codeMusicien*/)
+        {
+            ClassiqueEntities context = new ClassiqueEntities();
+            var albums = (from a in context.Album
+                          orderby a.Année_Album
+                          select a);
+
+            return albums.ToList();
+        }
 
     }
 }
