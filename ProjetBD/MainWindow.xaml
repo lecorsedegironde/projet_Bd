@@ -9,7 +9,7 @@
             <ObjectDataProvider x:Key="Pays" ObjectType="{x:Type data:Fournisseur}" MethodName="GetPays"/>
             <ObjectDataProvider x:Key="Instrument" ObjectType="{x:Type data:Fournisseur}" MethodName="GetInstruments"/>
             <data:ImageConverter x:Key="img"/>
-            <DataTemplate x:Key="musicienLayout" DataType="data:Musicien">
+            <DataTemplate x:Key="MusicienLayout" DataType="data:Musicien">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding Path=Photo, Converter={StaticResource img}}" RenderOptions.BitmapScalingMode="HighQuality" Height="50" Width="50"/>
                     <StackPanel Orientation="Vertical">
@@ -36,7 +36,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3"/>
-        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource musicienLayout}"/>
+        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource MusicienLayout}"/>
 
         <StackPanel Margin="5,5,0,0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Height="200" Width="200" Margin="10,10,10,10" Source="{Binding ElementName=LMusicien, Path=SelectedItem.Photo, Converter={StaticResource img}}"
