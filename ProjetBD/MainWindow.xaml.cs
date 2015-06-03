@@ -15,8 +15,7 @@ namespace ProjetBD
         private void LAlbums_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Album alb = (Album) LAlbums.SelectedItem;
-            Detail dt = new Detail();
-
+            Detail dt = new Detail(alb);
             dt.Show();
         }
 
