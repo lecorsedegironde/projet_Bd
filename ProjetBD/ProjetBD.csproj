@@ -91,6 +91,9 @@
     <Compile Include="Composition_Oeuvre.cs">
       <DependentUpon>Classique.tt</DependentUpon>
     </Compile>
+    <Compile Include="Detail.xaml.cs">
+      <DependentUpon>Detail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Direction.cs">
       <DependentUpon>Classique.tt</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
     <Compile Include="Type_Morceaux.cs">
       <DependentUpon>Classique.tt</DependentUpon>
     </Compile>
+    <Page Include="Detail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

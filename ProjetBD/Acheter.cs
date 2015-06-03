@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace ProjetBD
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Acheter
     {
         public int Code_Achat { get; set; }

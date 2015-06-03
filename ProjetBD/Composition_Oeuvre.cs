@@ -7,10 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace ProjetBD
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Composition_Oeuvre
     {
         public int Code_Composer_Oeuvre { get; set; }

@@ -2,13 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:data="clr-namespace:ProjetBD"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         Title="MainWindow" Height="500" Width="725">
     <Grid>
         <Grid.Resources>
             <ObjectDataProvider x:Key="Musiciens" ObjectType="{x:Type data:Fournisseur}" MethodName="GetMusiciens"/>
             <ObjectDataProvider x:Key="Pays" ObjectType="{x:Type data:Fournisseur}" MethodName="GetPays"/>
             <ObjectDataProvider x:Key="Instrument" ObjectType="{x:Type data:Fournisseur}" MethodName="GetInstruments"/>
-            <ObjectDataProvider x:Key="Album" ObjectType="{x:Type data:Fournisseur}" MethodName="GetAlbums" MethodParameters="{Binding SelectedItem.Code_Musicien ElementName=LMusicien}"/>
+            <ObjectDataProvider x:Key="Album" ObjectType="{x:Type data:Fournisseur}" MethodName="GetAlbums"/>
 
             <data:ImageConverter x:Key="img"/>
             <DataTemplate x:Key="MusicienLayout" DataType="data:Musicien">
@@ -37,12 +38,17 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Titre_Album}" FontWeight="Bold" Foreground="Blue"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"></TextBlock>
                             <TextBlock Text="{Binding Path=Année_Album}" FontWeight="Bold" Foreground="Green"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Editeur.Nom_Editeur}" FontWeight="Bold" Foreground="Red"/>
+                            <TextBlock Text=" - " FontWeight="Bold" Foreground="Black"></TextBlock>
+                            <TextBlock Text="{Binding Path=Editeur.Pays.Nom_Pays}" Foreground="Black"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Disque.Count}" FontWeight="Bold" Foreground="OrangeRed"></TextBlock>
+                            <TextBlock Text=" Disque(s)" FontWeight="Bold" Foreground="OrangeRed"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -54,11 +60,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3"/>
-        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource MusicienLayout}"/>
+        <ListBox Grid.Column="0" Name="LMusicien" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Musiciens}}" ItemTemplate="{DynamicResource MusicienLayout}" SelectionChanged="LMusicien_SelectionChanged"/>
 
         <StackPanel Margin="5,5,0,0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="200" Height="200" Source="{Binding SelectedItem.Photo, Converter={StaticResource img}, ElementName=LMusicien}"
-        		RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Bottom"/>
+        		RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="5,5,5,5"/>
             <StackPanel Orientation="Vertical" Width="200" Margin="40,0,0,0">
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Nom"/></TextBlock>
@@ -79,19 +85,19 @@
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Pays"/></TextBlock>
                     <ComboBox Height="20" x:Name="Pays" Width="80" Margin="54,0,0,0" Text="{Binding SelectedItem.Pays.Nom_Pays, ElementName=LMusicien}"
-                              ItemsSource="{Binding Source={StaticResource Pays}}"
-                              SelectedValuePath="Code_Pays"
-                              DisplayMemberPath="Nom_Pays"/>
+        				ItemsSource="{Binding Source={StaticResource Pays}}"
+        				SelectedValuePath="Code_Pays"
+        				DisplayMemberPath="Nom_Pays"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <TextBlock Height="20"><Run Text="Instrument"/></TextBlock>
                     <ComboBox Height="20" x:Name="Instrument" Width="80" Margin="20,0,0,0" Text="{Binding SelectedItem.Instrument.Nom_Instrument, ElementName=LMusicien}"
-                              ItemsSource="{Binding Source={StaticResource Instrument}}"
-                              SelectedValuePath="Code_Instrument"
-                              DisplayMemberPath="Nom_Instrument"/>
+        				ItemsSource="{Binding Source={StaticResource Instrument}}"
+        				SelectedValuePath="Code_Instrument"
+        				DisplayMemberPath="Nom_Instrument"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <ListBox x:Name="LAlbums" Grid.Column="2" Margin="5,200,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Album}}" ItemTemplate="{DynamicResource AlbumsLayout}"/>
+        <ListBox x:Name="LAlbums" Grid.Column="2" Margin="5,200,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000"  ItemsSource="{Binding Source={StaticResource Album}}" ItemTemplate="{DynamicResource AlbumsLayout}" MouseDoubleClick="LAlbums_MouseDoubleClick"/>
     </Grid>
 </Window>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="ProjetBD.Detail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:data="clr-namespace:ProjetBD"
+        Title="Detail" Height="300" Width="786">
+    <Grid Margin="0,0,2,0">
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="Abonnés" ObjectType="{x:Type data:Fournisseur}" MethodName="GetAbonnés"/>
+            <DataTemplate x:Key="AbonnésLayout" DataType="data:Abonné">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Nom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text=" , " FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text="{Binding Path=Prénom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Pays.Nom_Pays}" FontWeight="Bold" Foreground="DarkOrange"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="3"/>
+        <ListBox x:Name="LAbonnés" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Abonnés}}" ItemTemplate="{DynamicResource AbonnésLayout}"/>
+    </Grid>
+</Window>

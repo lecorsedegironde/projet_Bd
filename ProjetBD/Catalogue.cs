@@ -9,6 +9,9 @@
 
 namespace ProjetBD
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Catalogue
     {
         public int Code_Catalogue { get; set; }

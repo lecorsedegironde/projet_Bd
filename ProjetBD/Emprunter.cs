@@ -7,16 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace ProjetBD
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class Emprunter
     {
         public int Code_Emprunt { get; set; }
         public Nullable<int> Code_Abonné { get; set; }
         public Nullable<int> Code_Album { get; set; }
-        public Nullable<DateTime> Date_Emprunt { get; set; }
+        public Nullable<System.DateTime> Date_Emprunt { get; set; }
     
         public virtual Abonné Abonné { get; set; }
         public virtual Album Album { get; set; }

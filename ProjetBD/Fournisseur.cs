@@ -36,14 +36,32 @@ namespace ProjetBD
             return instr.ToList();
         }
 
-        public List<Album> GetAlbums(/*int codeMusicien*/)
+        public List<Album> GetAlbums()
+        {
+            return null;
+        }
+
+        public List<Album> GetAlbums(int codeMusicien)
         {
             ClassiqueEntities context = new ClassiqueEntities();
-            var albums = (from a in context.Album
-                          orderby a.Année_Album
-                          select a);
-
+            var albums = context.Composer.Where(c => c.Code_Musicien == codeMusicien)
+                .SelectMany(c => context.Oeuvre.Where(o => o.Code_Oeuvre == c.Code_Oeuvre))
+                .SelectMany(c => context.Composition_Oeuvre.Where(o => o.Code_Oeuvre == c.Code_Oeuvre))
+                .SelectMany(c => context.Composition.Where(o => c.Code_Composition == o.Code_Composition))
+                .SelectMany(c => context.Enregistrement.Where(o => o.Code_Composition == c.Code_Composition))
+                .SelectMany(c => context.Composition_Disque.Where(o => o.Code_Enregistrement == c.Code_Enregistrement))
+                .SelectMany(c => context.Disque.Where(o => o.Code_Disque == c.Code_Disque))
+                .SelectMany(c => context.Album.Where(o => o.Code_Album == c.Code_Album)).Distinct();
             return albums.ToList();
+        }
+
+        public List<Abonné> GetAbonnés()
+        {
+            ClassiqueEntities context = new ClassiqueEntities();
+            var abonné = (from a in context.Abonné
+                orderby a.Nom_Abonné
+                select a);
+            return abonné.ToList();
         }
 
     }
