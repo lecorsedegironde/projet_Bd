@@ -19,16 +19,13 @@ namespace ProjetBD
     /// </summary>
     public partial class Detail : Window
     {
-        public Album SelectedAlbum { get; set; }
-
-        private Album selectedAlbum;
-
         public Detail(Album selectedAlbum)
         {
-            this.selectedAlbum = selectedAlbum;
             InitializeComponent();
             NomAlbum.Text = selectedAlbum.Titre_Album;
             AlbumImage.Source = ImageConverter.ByteToImage(selectedAlbum.Pochette);
+            Fournisseur f = new Fournisseur();
+            LMorceaux.ItemsSource = f.GetEnregistrements(selectedAlbum.Code_Album);
         }
     }
 }

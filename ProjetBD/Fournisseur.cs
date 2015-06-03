@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.CodeDom;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjetBD
@@ -55,12 +56,28 @@ namespace ProjetBD
             return albums.ToList();
         }
 
+        public List<Enregistrement> GetEnregistrements()
+        {
+            return null;
+        }
+
+        public List<Enregistrement> GetEnregistrements(int codeAlbum)
+        {
+            ClassiqueEntities context = new ClassiqueEntities();
+            var enregistrements = (from e in context.Enregistrement
+                                   join c in context.Composition_Disque on e.Code_Enregistrement equals c.Code_Enregistrement
+                                   join d in context.Disque on c.Code_Disque equals d.Code_Disque
+                                   where d.Code_Album == codeAlbum
+                                   select e);
+            return enregistrements.ToList();
+        }
+
         public List<Abonné> GetAbonnés()
         {
             ClassiqueEntities context = new ClassiqueEntities();
             var abonné = (from a in context.Abonné
-                orderby a.Nom_Abonné
-                select a);
+                          orderby a.Nom_Abonné
+                          select a);
             return abonné.ToList();
         }
 
