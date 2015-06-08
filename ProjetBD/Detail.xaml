@@ -7,28 +7,35 @@
         <Grid.Resources>
             <ObjectDataProvider x:Key="Abonnés" ObjectType="{x:Type data:Fournisseur}" MethodName="GetAbonnés"/>
             <ObjectDataProvider x:Key="Enregistrements" ObjectType="{x:Type data:Fournisseur}" MethodName="GetEnregistrements"/>
-            
+
             <DataTemplate x:Key="AbonnésLayout" DataType="data:Abonné">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Nom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
-                    <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
-                    <TextBlock Text="{Binding Path=Prénom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Nom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text="{Binding Path=Prénom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Code_Abonné}" FontWeight="Bold" Foreground="Orange"></TextBlock>
+                        <TextBlock Text=", " Foreground="Orange"></TextBlock>
+                        <TextBlock Text="{Binding Path=Login}" Foreground="Orange"></TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </DataTemplate>
             <DataTemplate x:Key="EnregistrementsLayout" DataType="data:Enregistrement">
                 <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Titre}" FontWeight="Bold" Foreground="Blue"/>
-                    <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
-                    <TextBlock Text="{Binding Path=Durée}" FontWeight="Bold" Foreground="Green"/>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Titre}" FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
+                        <TextBlock Text="{Binding Path=Durée}" FontWeight="Bold" Foreground="Green"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Prix}" FontWeight="Bold" Foreground="Crimson"/>
                         <TextBlock Text=" €" FontWeight="Bold" Foreground="Crimson"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
-            
+
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -40,7 +47,8 @@
         <StackPanel Orientation="Vertical" Grid.Column="2" Margin="5,5,5,5">
             <Image x:Name="AlbumImage" Width="200" Height="200"/>
             <TextBlock x:Name="NomAlbum" FontWeight="Bold" Foreground="Blue" FontSize="15" HorizontalAlignment="Center"/>
-            <ListBox x:Name="LMorceaux" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Enregistrements}}" ItemTemplate="{DynamicResource EnregistrementsLayout}"/>
+            <Button x:Name="AcheterButton" Margin="5,10,5,5" Height="30" Width="100" Click="AcheterButton_Click">Acheter</Button>
         </StackPanel>
+        <ListBox x:Name="LMorceaux" Grid.Column="2" Margin="5,300,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Enregistrements}}" ItemTemplate="{DynamicResource EnregistrementsLayout}" />
     </Grid>
 </Window>
