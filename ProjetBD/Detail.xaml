@@ -26,10 +26,10 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Titre}" FontWeight="Bold" Foreground="Blue"/>
-                        <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
-                        <TextBlock Text="{Binding Path=Durée}" FontWeight="Bold" Foreground="Green"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Durée}" FontWeight="Bold" Foreground="Green"/>
+                        <TextBlock Text="- " FontWeight="Bold" Foreground="Green"/>
                         <TextBlock Text="{Binding Path=Prix}" FontWeight="Bold" Foreground="Crimson"/>
                         <TextBlock Text=" €" FontWeight="Bold" Foreground="Crimson"/>
                     </StackPanel>
@@ -47,7 +47,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="2" Margin="5,5,5,5">
             <Image x:Name="AlbumImage" Width="200" Height="200"/>
             <TextBlock x:Name="NomAlbum" FontWeight="Bold" Foreground="Blue" FontSize="15" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="AcheterButton" Margin="5,10,5,5" Height="30" Width="100" Click="AcheterButton_Click">Acheter</Button>
                 <Button x:Name="EmprunterButton" Margin="5,10,5,5" Height="30" Width="100" Click="EmprunterButton_Click">Emprunter</Button>
             </StackPanel>
