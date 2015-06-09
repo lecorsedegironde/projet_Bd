@@ -16,9 +16,9 @@
                         <TextBlock Text="{Binding Path=Prénom_Abonné}" FontWeight="Bold" Foreground="Blue"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Code_Abonné}" FontWeight="Bold" Foreground="Orange"></TextBlock>
-                        <TextBlock Text=", " Foreground="Orange"></TextBlock>
-                        <TextBlock Text="{Binding Path=Login}" Foreground="Orange"></TextBlock>
+                        <TextBlock Text="{Binding Path=Code_Abonné}" FontWeight="Bold" Foreground="Orange"/>
+                        <TextBlock Text=", " Foreground="Orange"/>
+                        <TextBlock Text="{Binding Path=Login}" Foreground="Orange"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>

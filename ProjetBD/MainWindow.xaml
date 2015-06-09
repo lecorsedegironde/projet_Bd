@@ -38,17 +38,17 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Titre_Album}" FontWeight="Bold" Foreground="Blue"/>
-                            <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"></TextBlock>
+                            <TextBlock Text=", " FontWeight="Bold" Foreground="Blue"/>
                             <TextBlock Text="{Binding Path=Année_Album}" FontWeight="Bold" Foreground="Green"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=Editeur.Nom_Editeur}" FontWeight="Bold" Foreground="Red"/>
-                            <TextBlock Text=" - " FontWeight="Bold" Foreground="Black"></TextBlock>
-                            <TextBlock Text="{Binding Path=Editeur.Pays.Nom_Pays}" Foreground="Black"></TextBlock>
+                            <TextBlock Text=" - " FontWeight="Bold" Foreground="Black"/>
+                            <TextBlock Text="{Binding Path=Editeur.Pays.Nom_Pays}" Foreground="Black"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Disque.Count}" FontWeight="Bold" Foreground="OrangeRed"></TextBlock>
-                            <TextBlock Text=" Disque(s)" FontWeight="Bold" Foreground="OrangeRed"></TextBlock>
+                            <TextBlock Text="{Binding Path=Disque.Count}" FontWeight="Bold" Foreground="OrangeRed"/>
+                            <TextBlock Text=" Disque(s)" FontWeight="Bold" Foreground="OrangeRed"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -67,30 +67,30 @@
         		RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Top" Margin="5,5,5,5"/>
             <StackPanel Orientation="Vertical" Width="200" Margin="40,0,0,0">
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Nom"/></TextBlock>
+                    <TextBlock Height="20" Text="Nom"/>
                     <TextBox Height="20" x:Name="Nom" Width="80" Margin="50,0,0,0" Text="{Binding SelectedItem.Nom_Musicien, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Prénom"/></TextBlock>
+                    <TextBlock Height="20" Text="Prénom"/>
                     <TextBox Height="20" x:Name="Prénom" Width="80" Margin="35,0,0,0" Text="{Binding SelectedItem.Prénom_Musicien, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Naissance"/></TextBlock>
+                    <TextBlock Height="20" Text="Naissance"/>
                     <TextBox Height="20" x:Name="Naissance" Width="80" Margin="24,0,0,0" Text="{Binding SelectedItem.Année_Naissance, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Décès"/></TextBlock>
+                    <TextBlock Height="20" Text="Décès"/>
                     <TextBox Height="20" x:Name="Décès" Width="80" Margin="45,0,0,0" Text="{Binding SelectedItem.Année_Mort, ElementName=LMusicien}"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Pays"/></TextBlock>
+                    <TextBlock Height="20" Text="Pays"/>
                     <ComboBox Height="20" x:Name="Pays" Width="80" Margin="54,0,0,0" Text="{Binding SelectedItem.Pays.Nom_Pays, ElementName=LMusicien}"
         				ItemsSource="{Binding Source={StaticResource Pays}}"
         				SelectedValuePath="Code_Pays"
         				DisplayMemberPath="Nom_Pays"/>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <TextBlock Height="20"><Run Text="Instrument"/></TextBlock>
+                    <TextBlock Height="20" Text="Instrument"/>
                     <ComboBox Height="20" x:Name="Instrument" Width="80" Margin="20,0,0,0" Text="{Binding SelectedItem.Instrument.Nom_Instrument, ElementName=LMusicien}"
         				ItemsSource="{Binding Source={StaticResource Instrument}}"
         				SelectedValuePath="Code_Instrument"
