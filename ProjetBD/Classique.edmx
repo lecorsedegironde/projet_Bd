@@ -16,8 +16,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="10" />
           <Property Name="Code_Pays" Type="int" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'Classique.dbo.Acheter' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="Acheter">
           <Key>
             <PropertyRef Name="Code_Achat" />
@@ -35,7 +33,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Acheter' n'a pas de clé primair
           <Property Name="Année_Album" Type="int" />
           <Property Name="Code_Genre" Type="int" />
           <Property Name="Code_Editeur" Type="int" />
-          <Property Name="Pochette" Type="image" />
+          <Property Name="Pochette" Type="varbinary(max)" />
           <Property Name="Prix" Type="float" />
         </EntityType>
         <!--Erreurs détectées durant la génération :
@@ -109,8 +107,6 @@ avertissement 6002: La table/vue 'Classique.dbo.Catalogue' n'a pas de clé prima
           <Property Name="Nom_Editeur" Type="nvarchar" MaxLength="50" />
           <Property Name="Code_Pays" Type="int" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="Emprunter">
           <Key>
             <PropertyRef Name="Code_Emprunt" />
@@ -118,7 +114,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <Property Name="Code_Emprunt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code_Abonné" Type="int" />
           <Property Name="Code_Album" Type="int" />
-          <Property Name="Date_Emprunt" Type="datetime" />
+          <Property Name="Date_Emprunt" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Enregistrement">
           <Key>
@@ -384,6 +380,30 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acheter_Abonné">
+          <End Role="Abonné" Type="Self.Abonné" Multiplicity="0..1" />
+          <End Role="Acheter" Type="Self.Acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abonné">
+              <PropertyRef Name="Code_Abonné" />
+            </Principal>
+            <Dependent Role="Acheter">
+              <PropertyRef Name="Code_Abonné" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acheter_Enregistrement">
+          <End Role="Enregistrement" Type="Self.Enregistrement" Multiplicity="0..1" />
+          <End Role="Acheter" Type="Self.Acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enregistrement">
+              <PropertyRef Name="Code_Enregistrement" />
+            </Principal>
+            <Dependent Role="Acheter">
+              <PropertyRef Name="Code_Enregistrement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Composer_Musicien">
           <End Role="Musicien" Type="Self.Musicien" Multiplicity="0..1" />
           <End Role="Composer" Type="Self.Composer" Multiplicity="*" />
@@ -482,6 +502,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
         </Association>
         <EntityContainer Name="ClassiqueModelStoreContainer">
           <EntitySet Name="Abonné" EntityType="Self.Abonné" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Acheter" EntityType="Self.Acheter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Composer" EntityType="Self.Composer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Composition" EntityType="Self.Composition" Schema="dbo" store:Type="Tables" />
@@ -490,6 +511,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <EntitySet Name="Direction" EntityType="Self.Direction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disque" EntityType="Self.Disque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Editeur" EntityType="Self.Editeur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emprunter" EntityType="Self.Emprunter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Enregistrement" EntityType="Self.Enregistrement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Instrument" EntityType="Self.Instrument" Schema="dbo" store:Type="Tables" />
@@ -499,13 +521,6 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <EntitySet Name="Orchestres" EntityType="Self.Orchestres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pays" EntityType="Self.Pays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type_Morceaux" EntityType="Self.Type_Morceaux" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Acheter" EntityType="Self.Acheter" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Acheter].[Code_Achat] AS [Code_Achat], 
-    [Acheter].[Code_Enregistrement] AS [Code_Enregistrement], 
-    [Acheter].[Code_Abonné] AS [Code_Abonné]
-    FROM [dbo].[Acheter] AS [Acheter]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Catalogue" EntityType="Self.Catalogue" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Catalogue].[Code_Catalogue] AS [Code_Catalogue], 
@@ -513,14 +528,6 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
     [Catalogue].[Musicien] AS [Musicien], 
     [Catalogue].[Sens] AS [Sens]
     FROM [dbo].[Catalogue] AS [Catalogue]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Emprunter" EntityType="Self.Emprunter" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Emprunter].[Code_Emprunt] AS [Code_Emprunt], 
-    [Emprunter].[Code_Abonné] AS [Code_Abonné], 
-    [Emprunter].[Code_Album] AS [Code_Album], 
-    [Emprunter].[Date_Emprunt] AS [Date_Emprunt]
-    FROM [dbo].[Emprunter] AS [Emprunter]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="Album_FK00" Association="Self.Album_FK00">
             <End Role="Editeur" EntitySet="Editeur" />
@@ -582,6 +589,14 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
             <End Role="Pays" EntitySet="Pays" />
             <End Role="Abonné" EntitySet="Abonné" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acheter_Abonné" Association="Self.FK_Acheter_Abonné">
+            <End Role="Abonné" EntitySet="Abonné" />
+            <End Role="Acheter" EntitySet="Acheter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acheter_Enregistrement" Association="Self.FK_Acheter_Enregistrement">
+            <End Role="Enregistrement" EntitySet="Enregistrement" />
+            <End Role="Acheter" EntitySet="Acheter" />
+          </AssociationSet>
           <AssociationSet Name="FK_Composer_Musicien" Association="Self.FK_Composer_Musicien">
             <End Role="Musicien" EntitySet="Musicien" />
             <End Role="Composer" EntitySet="Composer" />
@@ -631,6 +646,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <Property Name="Code_Pays" Type="Int32" />
           <NavigationProperty Name="Emprunter" Relationship="Self.Emprunter_FK00" FromRole="Abonné" ToRole="Emprunter" />
           <NavigationProperty Name="Pays" Relationship="Self.FK_Abonné_Pays" FromRole="Abonné" ToRole="Pays" />
+          <NavigationProperty Name="Acheter" Relationship="ClassiqueModel.FK_Acheter_Abonné" FromRole="Abonné" ToRole="Acheter" />
         </EntityType>
         <EntityType Name="Album">
           <Key>
@@ -738,6 +754,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <NavigationProperty Name="Composition_Disque" Relationship="Self.Composition_Disque_FK01" FromRole="Enregistrement" ToRole="Composition_Disque" />
           <NavigationProperty Name="Direction" Relationship="Self.Direction_FK00" FromRole="Enregistrement" ToRole="Direction" />
           <NavigationProperty Name="Interpréter" Relationship="Self.Interpréter_FK00" FromRole="Enregistrement" ToRole="Interpréter" />
+          <NavigationProperty Name="Acheter" Relationship="ClassiqueModel.FK_Acheter_Enregistrement" FromRole="Enregistrement" ToRole="Acheter" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -837,6 +854,8 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <Property Name="Code_Achat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code_Enregistrement" Type="Int32" />
           <Property Name="Code_Abonné" Type="Int32" />
+          <NavigationProperty Name="Abonné" Relationship="ClassiqueModel.FK_Acheter_Abonné" FromRole="Acheter" ToRole="Abonné" />
+          <NavigationProperty Name="Enregistrement" Relationship="ClassiqueModel.FK_Acheter_Enregistrement" FromRole="Acheter" ToRole="Enregistrement" />
         </EntityType>
         <EntityType Name="Catalogue">
           <Key>
@@ -854,7 +873,7 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
           <Property Name="Code_Emprunt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code_Abonné" Type="Int32" />
           <Property Name="Code_Album" Type="Int32" />
-          <Property Name="Date_Emprunt" Type="DateTime" Precision="3" />
+          <Property Name="Date_Emprunt" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Abonné" Relationship="Self.Emprunter_FK00" FromRole="Emprunter" ToRole="Abonné" />
           <NavigationProperty Name="Album" Relationship="Self.Emprunter_FK01" FromRole="Emprunter" ToRole="Album" />
         </EntityType>
@@ -1248,7 +1267,39 @@ avertissement 6002: La table/vue 'Classique.dbo.Emprunter' n'a pas de clé prima
             <End Role="Type_Morceaux" EntitySet="Type_Morceaux" />
             <End Role="Oeuvre" EntitySet="Oeuvre" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acheter_Abonné" Association="ClassiqueModel.FK_Acheter_Abonné">
+            <End Role="Abonné" EntitySet="Abonné" />
+            <End Role="Acheter" EntitySet="Acheter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acheter_Enregistrement" Association="ClassiqueModel.FK_Acheter_Enregistrement">
+            <End Role="Enregistrement" EntitySet="Enregistrement" />
+            <End Role="Acheter" EntitySet="Acheter" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Acheter_Abonné">
+          <End Type="ClassiqueModel.Abonné" Role="Abonné" Multiplicity="0..1" />
+          <End Type="ClassiqueModel.Acheter" Role="Acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abonné">
+              <PropertyRef Name="Code_Abonné" />
+            </Principal>
+            <Dependent Role="Acheter">
+              <PropertyRef Name="Code_Abonné" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acheter_Enregistrement">
+          <End Type="ClassiqueModel.Enregistrement" Role="Enregistrement" Multiplicity="0..1" />
+          <End Type="ClassiqueModel.Acheter" Role="Acheter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enregistrement">
+              <PropertyRef Name="Code_Enregistrement" />
+            </Principal>
+            <Dependent Role="Acheter">
+              <PropertyRef Name="Code_Enregistrement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

@@ -34,13 +34,15 @@ namespace ProjetBD
             Enregistrement enregistrement = (Enregistrement) LMorceaux.SelectedItem;
             if (acheteur != null && enregistrement != null)
             {
+                string messageAchat = "Vous avez acheté " + enregistrement.Titre + " au prix de : " + enregistrement.Prix + "€";
                 Acheter achat = new Acheter();
                 achat.Code_Abonné = acheteur.Code_Abonné;
                 achat.Code_Enregistrement = enregistrement.Code_Enregistrement;
                 ClassiqueEntities context = new ClassiqueEntities();
                 context.Acheter.Add(achat);
                 //A revoir, plante
-                //context.SaveChanges();
+                context.SaveChanges();
+                MessageBox.Show(messageAchat, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

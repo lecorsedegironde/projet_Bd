@@ -17,5 +17,8 @@ namespace ProjetBD
         public int Code_Achat { get; set; }
         public Nullable<int> Code_Enregistrement { get; set; }
         public Nullable<int> Code_Abonné { get; set; }
+    
+        public virtual Abonné Abonné { get; set; }
+        public virtual Enregistrement Enregistrement { get; set; }
     }
 }

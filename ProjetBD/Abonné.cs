@@ -17,6 +17,7 @@ namespace ProjetBD
         public Abonné()
         {
             this.Emprunter = new HashSet<Emprunter>();
+            this.Acheter = new HashSet<Acheter>();
         }
     
         public int Code_Abonné { get; set; }
@@ -28,5 +29,6 @@ namespace ProjetBD
     
         public virtual ICollection<Emprunter> Emprunter { get; set; }
         public virtual Pays Pays { get; set; }
+        public virtual ICollection<Acheter> Acheter { get; set; }
     }
 }

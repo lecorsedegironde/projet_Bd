@@ -19,6 +19,7 @@ namespace ProjetBD
             this.Composition_Disque = new HashSet<Composition_Disque>();
             this.Direction = new HashSet<Direction>();
             this.Interpréter = new HashSet<Interpréter>();
+            this.Acheter = new HashSet<Acheter>();
         }
     
         public int Code_Enregistrement { get; set; }
@@ -33,5 +34,6 @@ namespace ProjetBD
         public virtual ICollection<Composition_Disque> Composition_Disque { get; set; }
         public virtual ICollection<Direction> Direction { get; set; }
         public virtual ICollection<Interpréter> Interpréter { get; set; }
+        public virtual ICollection<Acheter> Acheter { get; set; }
     }
 }

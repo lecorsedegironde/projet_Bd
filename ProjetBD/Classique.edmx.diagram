@@ -49,6 +49,8 @@
         <AssociationConnector Association="ClassiqueModel.Interpréter_FK02" ManuallyRouted="false" />
         <AssociationConnector Association="ClassiqueModel.Musicien_FK01" ManuallyRouted="false" />
         <AssociationConnector Association="ClassiqueModel.Oeuvre_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassiqueModel.FK_Acheter_Abonné" />
+        <AssociationConnector Association="ClassiqueModel.FK_Acheter_Enregistrement" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
