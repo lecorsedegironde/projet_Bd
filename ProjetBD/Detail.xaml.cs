@@ -19,13 +19,15 @@ namespace ProjetBD
     /// </summary>
     public partial class Detail
     {
-        public Detail(Album selectedAlbum)
+        private readonly Album _selectedAlbum;
+        public Detail(Album a)
         {
             InitializeComponent();
-            NomAlbum.Text = selectedAlbum.Titre_Album;
-            AlbumImage.Source = ImageConverter.ByteToImage(selectedAlbum.Pochette);
+            _selectedAlbum = a;
+            NomAlbum.Text = _selectedAlbum.Titre_Album;
+            AlbumImage.Source = ImageConverter.ByteToImage(_selectedAlbum.Pochette);
             Fournisseur f = new Fournisseur();
-            LMorceaux.ItemsSource = f.GetEnregistrements(selectedAlbum.Code_Album);
+            LMorceaux.ItemsSource = f.GetEnregistrements(_selectedAlbum.Code_Album);
         }
 
         private void AcheterButton_Click(object sender, RoutedEventArgs e)
@@ -40,13 +42,35 @@ namespace ProjetBD
                 achat.Code_Enregistrement = enregistrement.Code_Enregistrement;
                 ClassiqueEntities context = new ClassiqueEntities();
                 context.Acheter.Add(achat);
-                //A revoir, plante
                 context.SaveChanges();
                 MessageBox.Show(messageAchat, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
             }
             else
             {
                 MessageBox.Show("Veuillez sélectionner un abonné et un enregistrement", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void EmprunterButton_Click(object sender, RoutedEventArgs e)
+        {
+            Abonné emprunteur = (Abonné) LAbonnés.SelectedItem;
+            if (emprunteur != null)
+            {
+                string messageEmprunt = "Vous avez emprunté " + _selectedAlbum.Titre_Album + ".";
+                Emprunter emprunt = new Emprunter();
+                emprunt.Code_Abonné = emprunteur.Code_Abonné;
+                emprunt.Code_Album = _selectedAlbum.Code_Album;
+                emprunt.Date_Emprunt = DateTime.Now;
+                ClassiqueEntities context = new ClassiqueEntities();
+                context.Emprunter.Add(emprunt);
+                context.SaveChanges();
+                MessageBox.Show(messageEmprunt, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un abonné", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

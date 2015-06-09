@@ -47,7 +47,10 @@
         <StackPanel Orientation="Vertical" Grid.Column="2" Margin="5,5,5,5">
             <Image x:Name="AlbumImage" Width="200" Height="200"/>
             <TextBlock x:Name="NomAlbum" FontWeight="Bold" Foreground="Blue" FontSize="15" HorizontalAlignment="Center"/>
-            <Button x:Name="AcheterButton" Margin="5,10,5,5" Height="30" Width="100" Click="AcheterButton_Click">Acheter</Button>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AcheterButton" Margin="5,10,5,5" Height="30" Width="100" Click="AcheterButton_Click">Acheter</Button>
+                <Button x:Name="EmprunterButton" Margin="5,10,5,5" Height="30" Width="100" Click="EmprunterButton_Click">Emprunter</Button>
+            </StackPanel>
         </StackPanel>
         <ListBox x:Name="LMorceaux" Grid.Column="2" Margin="5,300,5,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#FF190000" ItemsSource="{Binding Source={StaticResource Enregistrements}}" ItemTemplate="{DynamicResource EnregistrementsLayout}" />
     </Grid>
